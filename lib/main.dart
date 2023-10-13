@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/providers/employee_provider.dart';
+import 'package:provider/provider.dart';
 
-import 'package:google_fonts/google_fonts.dart';
-import 'package:my_app/screens/employees.dart';
-
-final theme = ThemeData(
-  useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(
-    brightness: Brightness.dark,
-    seedColor: const Color.fromARGB(255, 131, 57, 0),
-  ),
-  textTheme: GoogleFonts.latoTextTheme(),
-);
+import 'package:my_app/screens/home.dart';
 
 void main() {
-  runApp(const App());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => EmployeeProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme,
-      home: const EmployeesScreen(),
+      home: Home(),
     );
   }
 }
