@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/boxes/boxes.dart';
+import 'package:my_app/models/employee.dart';
 import 'package:my_app/providers/employee_provider.dart';
 import 'package:my_app/screens/employees.dart';
 import 'package:provider/provider.dart';
@@ -146,15 +148,28 @@ class _FormScreenState extends State<FormScreen> {
                   };
 
                   setState(() {
-                   Provider.of<EmployeeProvider>(context, listen: false).addEmployee(newEmployee);
+                  //  Provider.of<EmployeeProvider>(context, listen: false).addEmployee(newEmployee);
 
-                    // Clear form fields
-                    nameController.clear();
-                    lastNameController.clear();
-                    dateController.clear();
-                    timeInController.clear();
-                    timeOutController.clear();
-                    jobRole = "Engineer";
+                  //   // Clear form fields
+                  //   nameController.clear();
+                  //   lastNameController.clear();
+                  //   dateController.clear();
+                  //   timeInController.clear();
+                  //   timeOutController.clear();
+                  //   jobRole = "Engineer";
+
+                    String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+                    Employee newEmp = Employee(
+                        firstName: nameController.text,
+                        lastName: lastNameController.text,
+                        jobPosition: jobRole,
+                        workplace: 'Workplace_here', // Fill appropriately
+                        birthDate: selectedDate,
+                        arrivalTime: timeInController.text,
+                        departureTime: timeOutController.text,
+                        id:'id');
+                        boxEmployees.put(uniqueId, newEmp);
+                  
                   });
                 },
                 child: Text("Add Employee"),
