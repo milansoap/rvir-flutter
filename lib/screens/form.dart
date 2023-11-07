@@ -4,6 +4,8 @@ import 'package:my_app/models/employee.dart';
 import 'package:my_app/providers/employee_provider.dart';
 import 'package:my_app/screens/employees.dart';
 import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class FormScreen extends StatefulWidget {
   @override
@@ -117,7 +119,6 @@ class _FormScreenState extends State<FormScreen> {
               readOnly: true,
               decoration: getDecoration('Datum rojstva'),
             ),
-
             SizedBox(height: 16.0),
             TextFormField(
               controller: timeInController,
@@ -147,18 +148,29 @@ class _FormScreenState extends State<FormScreen> {
                     "Time Out": timeOutController.text,
                   };
 
+                   Fluttertoast.showToast(
+                      msg: "Employee added successfully",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 2,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                    );
+
                   setState(() {
-                  //  Provider.of<EmployeeProvider>(context, listen: false).addEmployee(newEmployee);
+                    //  Provider.of<EmployeeProvider>(context, listen: false).addEmployee(newEmployee);
 
-                  //   // Clear form fields
-                  //   nameController.clear();
-                  //   lastNameController.clear();
-                  //   dateController.clear();
-                  //   timeInController.clear();
-                  //   timeOutController.clear();
-                  //   jobRole = "Engineer";
+                    //   // Clear form fields
+                    //   nameController.clear();
+                    //   lastNameController.clear();
+                    //   dateController.clear();
+                    //   timeInController.clear();
+                    //   timeOutController.clear();
+                    //   jobRole = "Engineer";
 
-                    String uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+                    String uniqueId =
+                        DateTime.now().millisecondsSinceEpoch.toString();
                     Employee newEmp = Employee(
                         firstName: nameController.text,
                         lastName: lastNameController.text,
@@ -167,9 +179,8 @@ class _FormScreenState extends State<FormScreen> {
                         birthDate: selectedDate,
                         arrivalTime: timeInController.text,
                         departureTime: timeOutController.text,
-                        id:'id');
-                        boxEmployees.put(uniqueId, newEmp);
-                  
+                        id: 'id');
+                    boxEmployees.put(uniqueId, newEmp);
                   });
                 },
                 child: Text("Add Employee"),
